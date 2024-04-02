@@ -1,0 +1,40 @@
+{
+  "app": {
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 720,
+        "resizable": true,
+        "title": "MaaZ",
+        "width": 1280,
+        "decorations": false
+      }
+    ]
+  },
+  "build": {
+    "beforeBuildCommand": "pnpm build",
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
+  },
+  "bundle": {
+    "active": true,
+    "icon": [
+      "icons/icon.ico"
+    ],
+    "targets": [
+      "msi"
+    ]
+  },
+  "identifier": "org.maa.maaz",
+  "plugins": {
+    "shell": {
+      "open": true
+    }
+  },
+  "productName": "maa-z",
+  "version": "0.0.1"
+}

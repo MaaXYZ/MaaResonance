@@ -1,0 +1,3 @@
+[submodule "tauri/MaaAgentBinary"]
+	path = tauri/MaaAgentBinary
+	url = https://github.com/MaaAssistantArknights/MaaAgentBinary.git

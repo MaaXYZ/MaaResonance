@@ -1,0 +1,15 @@
+{
+    "bundle": {
+        "resources": [
+            "resources/*",
+            "MaaAgentBinary/*",
+            "fastdeploy_ppocr_maa.dll",
+            "MaaAdbControlUnit.dll",
+            "MaaFramework.dll",
+            "MaaToolkit.dll",
+            "MaaUtils.dll",
+            "onnxruntime_maa.dll",
+            "opencv_world4_maa.dll"
+        ]
+    }
+}

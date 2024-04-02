@@ -1,0 +1,109 @@
+[package]
+name = "maa-z"
+version = "0.0.0"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "2.0.0-beta", features = [] }
+zip = { version = "0.6.6", default-features = false, features = ["deflate"] }
+
+[dependencies]
+tauri = { version = "2.0.0-beta", features = ["unstable"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["time", "local-time"] }
+tracing-appender = "0.2.3"
+toml = "0.8.10"
+tauri-plugin-notification = "2.0.0-beta.0"
+maa-framework = { version="0.2.4", default-features = false, features = ["adb", "toolkit", "internal"] }
+tauri-plugin-dialog = "2.0.0-beta.1"
+thiserror = "1.0.57"
+
+[lib]
+name = "maaz"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
+mock = []
+
+[lints.clippy]
+"pedantic" = { level = "warn", priority = -1 }
+
+"module-name-repetitions" = "allow"
+"enum_variant_names" = "allow"
+
+# from restriction group
+"assertions_on_result_states" = "warn"
+"clone_on_ref_ptr" = "warn"
+"create_dir" = "warn"
+"decimal_literal_representation" = "warn"
+"default_union_representation" = "warn"
+"empty_drop" = "warn"
+"empty_enum_variants_with_brackets" = "warn"
+"empty_structs_with_brackets" = "warn"
+"expect_used" = "warn"
+"filetype_is_file" = "warn"
+"if_then_some_else_none" = "warn"
+"format_push_string" = "warn"
+"error_impl_error" = "warn"
+"impl_trait_in_params" = "warn"
+"infinite_loop" = "warn"
+"let_underscore_must_use" = "warn"
+"map_err_ignore" = "warn"
+"mem_forget" = "warn"
+"multiple_inherent_impl" = "warn"
+"mutex_atomic" = "warn"
+"needless_raw_strings" = "warn"
+"panic" = "warn"
+"pattern_type_mismatch" = "warn"
+"print_stderr" = "warn"
+"print_stdout" = "warn"
+"pub_without_shorthand" = "warn"
+"rc_mutex" = "warn"
+"rest_pat_in_fully_bound_structs" = "warn"
+"semicolon_outside_block" = "warn"
+"shadow_same" = "warn"
+"shadow_unrelated" = "warn"
+"single_char_lifetime_names" = "warn"
+"str_to_string" = "warn"
+"string_slice" = "warn"
+"string_to_string" = "warn"
+"suspicious_xor_used_as_pow" = "warn"
+"todo" = "warn"
+"try_err" = "warn"
+"unnecessary_safety_comment" = "warn"
+"unnecessary_safety_doc" = "warn"
+"unnecessary_self_imports" = "warn"
+"unneeded_field_pattern" = "warn"
+"unwrap_used" = "warn"
+"use_debug" = "warn"
+"verbose_file_reads" = "warn"
+"wildcard_enum_match_arm" = "warn"
+
+"dbg_macro" = "deny"
+"float_cmp_const" = "deny"
+"fn_to_numeric_cast_any" = "deny"
+"large_include_file" = "deny"
+"lossy_float_literal" = "deny"
+"missing_assert_message" = "deny"
+"mixed_read_write_in_expression" = "deny"
+"mod_module_files" = "deny"
+"multiple_unsafe_ops_per_block" = "deny"
+"panic_in_result_fn" = "deny"
+"same_name_method" = "deny"
+"tests_outside_test_module" = "deny"
+"undocumented_unsafe_blocks" = "deny"
+"unseparated_literal_suffix" = "deny"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
