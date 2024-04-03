@@ -5,7 +5,6 @@ import App from "./App.vue";
 import { createPinia } from "pinia";
 import { setupListener } from "./CallbackListner";
 import ToastPlugin from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
 
 import 'mdui/mdui.css';
 
@@ -17,6 +16,9 @@ import 'mdui/components/linear-progress'
 import 'mdui/components/tabs'
 import 'mdui/components/tab'
 import 'mdui/components/tab-panel'
+import 'mdui/components/dropdown'
+import 'mdui/components/menu'
+import 'mdui/components/menu-item'
 
 const app = createApp(App);
 

@@ -59,7 +59,8 @@ impl TaskQueue {
                 TaskRunningState::Completed
             } else {
                 TaskRunningState::Failed
-            }
+            };
+            trace!("Task completed: {:?} with {success}", self.queue[index]);
         }
     }
 
@@ -127,17 +128,10 @@ impl TaskQueue {
     }
 
     /// This sends a stop signal to fw and mark the running task as Pending
-    pub fn stop(&mut self, handle: &MaaInstance<CallbackEventHandler>) {
+    pub fn stop(handle: &MaaInstance<CallbackEventHandler>) {
         let stop_ret = handle.post_stop();
         if stop_ret.is_err() {
             error!("Error while stopping task");
-        }
-        if let Some(index) = self
-            .queue
-            .iter()
-            .position(|t| matches!(t.state, TaskRunningState::Running))
-        {
-            self.queue[index].state = TaskRunningState::Pending;
         }
     }
 }

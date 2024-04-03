@@ -6,7 +6,7 @@ use tauri::{
     AppHandle, Manager,
 };
 use tauri_plugin_notification::NotificationExt;
-use tracing::{error, info, trace_span};
+use tracing::{error, info, trace, trace_span};
 
 use crate::{ConfigHolderState, TaskQueueState};
 
@@ -108,7 +108,9 @@ pub async fn setup_callback(
                     notify!(app_handle, "Task Queue Finished");
                 }
             }
-            _ => {}
+            _ => {
+                trace!("Unhandled message: {:?}", msg);
+            }
         }
     }
 }

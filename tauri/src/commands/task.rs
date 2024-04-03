@@ -4,7 +4,7 @@ use tauri::State;
 use tracing::info;
 
 use crate::{
-    queue::QueueStartStatus,
+    queue::{QueueStartStatus, TaskQueue},
     task::{TaskStatus, TaskType},
     ConfigHolderState, Instance, MaaZError, MaaZResult, TaskQueueState,
 };
@@ -47,13 +47,9 @@ pub async fn start_queue(
 }
 
 #[tauri::command]
-pub async fn stop_queue(
-    task_queue: State<'_, TaskQueueState>,
-    handle: State<'_, Arc<Instance>>,
-) -> MaaZResult<()> {
+pub async fn stop_queue(handle: State<'_, Arc<Instance>>) -> MaaZResult<()> {
     tracing::info!("Stopping task queue");
-    let mut queue = task_queue.lock().await;
-    queue.stop(&handle);
+    TaskQueue::stop(&handle);
     Ok(())
 }
 

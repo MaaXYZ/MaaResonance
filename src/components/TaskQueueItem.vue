@@ -27,8 +27,8 @@ function removeCurrent() {
                 slot="trigger"
                 class="flex flex-col w-full h-full layer"
             >
-                <p class="text-center">
-                    <mdui-icon v-if="task.state === 'Completed'">
+                <div class="flex flex-row items-center justify-center">
+                    <mdui-icon v-if="task.state === 'Completed'" style="color:green">
                         <DoneIcon />
                     </mdui-icon>
                     <mdui-icon
@@ -37,8 +37,10 @@ function removeCurrent() {
                     >
                         <CloseIcon />
                     </mdui-icon>
-                    {{ props.task.taskType }}
-                </p>
+                    <p>
+                        {{ props.task.taskType }}
+                    </p>
+                </div>
                 <mdui-linear-progress
                     v-if="props.task.state === 'Running'"
                 ></mdui-linear-progress>
