@@ -58,7 +58,7 @@ function startMiniWindow() {
 </script>
 
 <template>
-    <div class="-mr-3 rounded-lg bg-white p-2 pt-4">
+    <mdui-card variant="elevated" class="-mr-3 p-2 pt-4">
         <mdui-button class="w-full" @click="queueAction"
             >{{ taskQueueActionText }}
             <mdui-icon slot="icon">
@@ -86,7 +86,7 @@ function startMiniWindow() {
         >
             {{ task }}
         </mdui-button>
-    </div>
+    </mdui-card>
 </template>
 
 <style scoped></style>

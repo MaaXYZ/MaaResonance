@@ -11,7 +11,7 @@ const tabs:Record<TaskType,any> = {
 </script>
 
 <template>
-    <div class="mx-2 rounded-lg bg-white">
+    <mdui-card variant="elevated" class="mx-2 rounded-lg">
         <mdui-tabs value="StartUp" class="h-full">
             <mdui-tab v-for="taskType in allTaskTypes" :value="taskType">{{ taskType }}</mdui-tab>
 
@@ -19,5 +19,5 @@ const tabs:Record<TaskType,any> = {
                 <component :is="tabs[taskType]" />
             </mdui-tab-panel>
         </mdui-tabs>
-    </div>
+    </mdui-card>
 </template>
