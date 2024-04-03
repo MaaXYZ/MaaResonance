@@ -1,0 +1,29 @@
+{
+  "alwaysOnTop": "置顶窗口",
+  "appName": "MAA Resonance",
+  "availableDevices": "可连接设备",
+  "close": "关闭",
+  "connectedDevice": "已连接的设备",
+  "failedConnect": "连接错误：",
+  "failedGetConfig": "获取设置失败",
+  "failedToStartMiniWindow": "启动迷你窗口失败",
+  "miniWindow": "迷你窗口",
+  "noDevice": "未连接设备",
+  "noDeviceFound": "没有可连接的设备",
+  "noTaskInQueue": "队列中没有任务",
+  "queueStopped": "队列停止",
+  "rescan": "重新扫描",
+  "searching": "搜索中...",
+  "settings": {
+    "adbScreencap": "ADB截屏方法",
+    "adbTouch": "ADB Touch方法",
+    "appSettings": "应用设置",
+    "noParams": "这个任务没有参数",
+    "times": "次数"
+  },
+  "start": "开始",
+  "stop": "停止",
+  "remove": "移除",
+  "noTasks": "队列是空的",
+  "notReady": "MAA还未准备好"
+}

@@ -14,6 +14,9 @@ dependencies:
   '@tauri-apps/plugin-notification':
     specifier: 2.0.0-beta.0
     version: 2.0.0-beta.0
+  '@tauri-apps/plugin-os':
+    specifier: 2.0.0-beta.2
+    version: 2.0.0-beta.2
   mdui:
     specifier: ^2.0.6
     version: 2.0.6
@@ -576,6 +579,11 @@ packages:
     engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
     dev: false
 
+  /@tauri-apps/api@2.0.0-beta.4:
+    resolution: {integrity: sha512-Nxtj28NYUo5iwYkpYslxmOPkdI2WkELU2e3UH9nbJm9Ydki2CQwJVGQxx4EANtdZcMNsEsUzRqaDTvEUYH1l6w==}
+    engines: {node: '>= 18', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
+
   /@tauri-apps/cli-darwin-arm64@2.0.0-beta.2:
     resolution: {integrity: sha512-bAchrSNhFlj1U1rBZ3WJYQU5urN9bpaHlSW8UnTEkkDK0bwcLQyf+AYtRFCy8mWHq6n1RhXxVa6nbTg4DZl7RA==}
     engines: {node: '>= 10'}
@@ -697,6 +705,12 @@ packages:
     resolution: {integrity: sha512-yYlsm18t1wfZ9Zxg/8WBEgrgJLaapvEysa2gS6YAVB1D/ob8qMSeVgFY1NdJbIM7UpgB8w/xp0DTR+5RQyLNhg==}
     dependencies:
       '@tauri-apps/api': 2.0.0-beta.0
+    dev: false
+
+  /@tauri-apps/plugin-os@2.0.0-beta.2:
+    resolution: {integrity: sha512-rhJ/sEYvEAeMUQt6UiFODi5dT6F/ciNZYBQrbFTwhIqwQ2fp87dmzsscMy7FQ9LOor8AW+kL1KWoadfgzA/mSA==}
+    dependencies:
+      '@tauri-apps/api': 2.0.0-beta.4
     dev: false
 
   /@types/estree@1.0.5:

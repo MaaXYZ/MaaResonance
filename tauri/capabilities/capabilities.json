@@ -8,7 +8,8 @@
   "permissions": [
     "event:allow-listen",
     "notification:allow-is-permission-granted",
-    "window:allow-start-dragging"
+    "window:allow-start-dragging",
+    "os:allow-locale"
   ],
   "platforms": [
     "linux",

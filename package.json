@@ -14,6 +14,7 @@
     "@tauri-apps/api": "2.0.0-beta.1",
     "@tauri-apps/plugin-dialog": "2.0.0-beta.1",
     "@tauri-apps/plugin-notification": "2.0.0-beta.0",
+    "@tauri-apps/plugin-os": "2.0.0-beta.2",
     "mdui": "^2.0.6",
     "path": "^0.12.7",
     "pinia": "^2.1.7",

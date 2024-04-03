@@ -12,7 +12,7 @@ const app = createApp(MiniWindow);
 const pinia = createPinia();
 app.use(pinia);
 
-app.use(i18n);
+app.use(await i18n());
 
 setupListener();
 
