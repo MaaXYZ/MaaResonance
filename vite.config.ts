@@ -37,6 +37,7 @@ export default defineConfig(async () => ({
       input: {
         main: resolve(__dirname, 'index.html'),
         miniwindow: resolve(__dirname, 'mini.html'),
+        settingswindow: resolve(__dirname, 'settings.html')
       }
     }
   }
