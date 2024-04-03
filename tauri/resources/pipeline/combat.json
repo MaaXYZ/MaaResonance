@@ -1,0 +1,96 @@
+{
+    "Combat": {
+        "next": [
+            "Sub_GoToCombat"
+        ]
+    },
+    "Sub_GoToCombat": {
+        "is_sub": true,
+        "next": [
+            "GoToCombat",
+            "CheckSituation"
+        ]
+    },
+    "GoToCombat": {
+        "enabled": true,
+        "recognition": "OCR",
+        "text": "前往作战",
+        "action": "Click"
+    },
+    "CheckSituation": {
+        "next": [
+            "CheckSanity_DailyOff",
+            "CheckSanity_DailyOn",
+            "StartCombat",
+            "CheckCombatFinished"
+        ]
+    },
+    "CheckSanity_DailyOff": {
+        "recognition": "TemplateMatch",
+        "template": "Combat/CheckSanity.png",
+        "roi": [
+            473,
+            338,
+            424,
+            47
+        ],
+        "next": [
+            "Stop"
+        ]
+    },
+    "CheckSanity_DailyOn": {
+        "recognition": "OCR",
+        "text": "请选择恢复方式",
+        "roi": [
+            354,
+            428,
+            198,
+            39
+        ],
+        "next": [
+            "Stop"
+        ]
+    },
+    "Sub_StartCombat": {
+        "is_sub": true,
+        "next": [
+            "StartCombat"
+        ]
+    },
+    "StartCombat": {
+        "recognition": "TemplateMatch",
+        "template": "Combat/StartCombat.png",
+        "action": "Click"
+    },
+    "Sub_CheckCombatFinished":{
+        "is_sub": true,
+        "post_wait_freezes": {
+            "time": 5000,
+            "threshold": 0.80,
+            "target": [
+                722,
+                419,
+                506,
+                107
+            ]
+        },
+        "next":[
+            "CheckCombatFinished"
+        ]
+    },
+    "CheckCombatFinished": {
+        "pre_wait_freezes": {
+            "time": 2000,
+            "threshold": 0.80,
+            "target": [
+                722,
+                419,
+                506,
+                107
+            ]
+        },
+        "recognition": "TemplateMatch",
+        "template": "Combat/NextStep.png",
+        "action": "Click"
+    }
+}

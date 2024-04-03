@@ -4,15 +4,15 @@ import { useMaaStateStore } from "@/stores/MaaStateStore";
 import TaskQueue from "./TaskQueue.vue";
 import TaskSettings from "./TaskSettings.vue";
 import TaskCommand from "./TaskCommand.vue";
-import { useToast } from "vue-toast-notification";
+import { snackbar } from "mdui/functions/snackbar";
 
 const maaStateStore = useMaaStateStore();
 
-const toast = useToast();
-
 onMounted(() => {
     maaStateStore.getConfig().catch((err) => {
-        toast.error("Failed to get MAA config: " + err);
+        snackbar({
+            message: "Failed to get MAA config: " + err,
+        })
     });
 });
 </script>

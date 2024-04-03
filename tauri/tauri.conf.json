@@ -8,7 +8,7 @@
         "fullscreen": false,
         "height": 720,
         "resizable": true,
-        "title": "MaaZ",
+        "title": "MaaR",
         "width": 1280,
         "decorations": false
       }
@@ -29,12 +29,12 @@
       "msi"
     ]
   },
-  "identifier": "org.maa.maaz",
+  "identifier": "org.maa.resonance",
   "plugins": {
     "shell": {
       "open": true
     }
   },
-  "productName": "maa-z",
+  "productName": "maa-resonance",
   "version": "0.0.1"
 }

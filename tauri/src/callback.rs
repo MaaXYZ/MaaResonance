@@ -81,20 +81,32 @@ pub async fn setup_callback(
 
         #[allow(clippy::match_same_arms)]
         match msg {
-            MaaMsg::TaskCompleted(task) => {
+            MaaMsg::TaskCompleted(_task) => {
                 let queue = Arc::clone(&queue);
                 let config = Arc::clone(&config);
                 async_runtime::spawn(async move {
                     info!("Running next task");
                     let mut queue = queue.lock().await;
                     let config = config.lock().await;
-                    let has_next = queue.run_next(&instance, config.config());
+                    let has_next = queue.run_next(&instance, config.config(), true);
                     if !has_next {
                         #[allow(clippy::unwrap_used)]
                         app_handle.emit(QUEUE_DONE_EVENT, ()).unwrap();
                         notify!(app_handle, "Task Queue Finished");
                     }
                 });
+            }
+            MaaMsg::TaskFailed(task) => {
+                error!("Task failed: {:?}", task);
+                notify!(app_handle, "Task Failed", &task.name);
+                let mut queue = queue.lock().await;
+                let config = config.lock().await;
+                let has_next = queue.run_next(&instance, config.config(), false);
+                if !has_next {
+                    #[allow(clippy::unwrap_used)]
+                    app_handle.emit(QUEUE_DONE_EVENT, ()).unwrap();
+                    notify!(app_handle, "Task Queue Finished");
+                }
             }
             _ => {}
         }

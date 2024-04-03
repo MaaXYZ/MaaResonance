@@ -1,11 +1,12 @@
 use maa_framework::instance::MaaInstance;
 use serde::{Deserialize, Serialize};
+use serde_json::json;
 use tracing::{error, info, trace, trace_span};
 
 use crate::{
     callback::CallbackEventHandler,
     config::Config,
-    task::{StartUpParam, TaskRunningState, TaskStatus, TaskType},
+    task::{TaskRunningState, TaskStatus, TaskType},
 };
 
 #[derive(Default, Serialize, Deserialize)]
@@ -48,21 +49,25 @@ impl TaskQueue {
     }
 
     /// Mark the running task as completed
-    pub fn complete_running(&mut self) {
+    pub fn complete_running(&mut self, success: bool) {
         if let Some(index) = self
             .queue
             .iter()
             .position(|t| matches!(t.state, TaskRunningState::Running))
         {
-            self.queue[index].state = TaskRunningState::Completed;
+            self.queue[index].state = if success {
+                TaskRunningState::Completed
+            } else {
+                TaskRunningState::Failed
+            }
         }
     }
 
     /// Mark the running task as completed and start the next task
-    pub fn run_next(&mut self, handle: &MaaInstance<CallbackEventHandler>, config: Config) -> bool {
+    pub fn run_next(&mut self, handle: &MaaInstance<CallbackEventHandler>, config: Config, success: bool) -> bool {
         let span = trace_span!("run_next");
         let _guard = span.enter();
-        self.complete_running();
+        self.complete_running(success);
         trace!("Running next task");
         if let Some(index) = self
             .queue
@@ -76,11 +81,7 @@ impl TaskQueue {
             let entry = task.task_type.get_string();
 
             let id = match task.task_type {
-                TaskType::StartUp => {
-                    let start_up_config = config.start_up;
-                    let start_up_param: StartUpParam = start_up_config.into();
-                    handle.post_task(&entry, start_up_param)
-                }
+                TaskType::StartUp | TaskType::Combat => handle.post_task(&entry, json!({})),
             };
             task.id = Some(id);
             true
@@ -121,7 +122,7 @@ impl TaskQueue {
             return QueueStartStatus::NoPendingTasks;
         }
 
-        self.run_next(handle, config);
+        self.run_next(handle, config, true);
         QueueStartStatus::Started
     }
 

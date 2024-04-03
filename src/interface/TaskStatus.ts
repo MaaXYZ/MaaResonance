@@ -1,4 +1,4 @@
-export const allTaskTypes = ["StartUp","Award"] as const;
+export const allTaskTypes = ["StartUp","Combat"] as const;
 
 export type TaskType = (typeof allTaskTypes)[number];
 

@@ -49,7 +49,7 @@ pub async fn init_maa(
 // This needs to be async otherwise it will cause deadlock on windows
 pub async fn start_mini_window(app: AppHandle) -> MaaZResult<()> {
     tauri::WebviewWindowBuilder::new(&app, "mini", tauri::WebviewUrl::App("mini.html".into()))
-        .title("MaaZ Mini")
+        .title("MaaResonance Mini")
         .inner_size(256.0, 512.0)
         .decorations(false)
         .maximizable(false)
@@ -72,7 +72,7 @@ pub async fn open_settings_window(app: AppHandle) -> MaaZResult<()> {
         "settings",
         tauri::WebviewUrl::App("settings.html".into()),
     )
-    .title("MaaZ Settings")
+    .title("MaaResonance Settings")
     .inner_size(800.0, 600.0)
     .build()?
     .show()?;

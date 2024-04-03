@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { allTaskTypes } from "@/interface/TaskStatus";
-import StartUpSettings from "./settings/StartUpSettings.vue";
+import { TaskType, allTaskTypes } from "@/interface/TaskStatus";
 import EmptySettings from "./settings/EmptySettings.vue";
 
-const tabs = {
-    StartUp: StartUpSettings,
-    Award: EmptySettings,
+const tabs:Record<TaskType,any> = {
+    StartUp: EmptySettings,
+    Combat: EmptySettings
 };
 
 </script>

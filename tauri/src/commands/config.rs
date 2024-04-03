@@ -47,5 +47,3 @@ config_writer!(
     adb_controller_type,
     MaaAdbControllerType
 );
-
-config_writer!(set_client_type, start_up, client_type, String);

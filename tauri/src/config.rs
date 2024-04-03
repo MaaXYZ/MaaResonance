@@ -4,16 +4,13 @@ use serde::{Deserialize, Serialize};
 
 use crate::MaaZInnerResult;
 
-use self::{app::AppConfig, start_up::StartUpConfig};
+use self::app::AppConfig;
 
 pub mod app;
-pub mod start_up;
 
 #[derive(Serialize, Deserialize, Default, Clone, Copy)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
-    #[serde(default)]
-    pub start_up: StartUpConfig,
     #[serde(default)]
     pub app_config: AppConfig,
 }

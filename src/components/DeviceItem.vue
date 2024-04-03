@@ -4,13 +4,11 @@ import DeviceInfo from "../interface/DeviceInfo";
 import { useDeviceStateStore } from "@/stores/DeviceStateStore";
 import DoneIcon from "@/assets/icons/DoneIcon.vue";
 import SendIcon from "@/assets/icons/SendIcon.vue";
-import { useToast } from "vue-toast-notification";
+import { snackbar } from "mdui/functions/snackbar";
 
 const props = defineProps<{
     device: DeviceInfo;
 }>();
-
-const toast = useToast();
 
 const deviceStateStore = useDeviceStateStore();
 
@@ -28,7 +26,9 @@ function connectToDevice() {
         .connectTo(props.device)
         .catch((e) => {
             console.error(e);
-            toast.error("Failed to connect to device");
+            snackbar({
+                message: "Failed to connect to device",
+            });
         })
         .finally(() => {
             deviceConnecting.value = false;

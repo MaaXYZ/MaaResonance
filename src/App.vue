@@ -37,7 +37,7 @@ function openSettings() {
             class="app-heade h-10 select-none flex flex-row items-center justify-between p-2"
         >
             <div class="header">
-                <span class="text-lg text-center font-bold">MAA Z</span>
+                <span class="text-lg text-center font-bold">MAA Resonance</span>
             </div>
             <div class="controls">
                 <mdui-button-icon @click="openSettings">
