@@ -5,6 +5,9 @@ import { useDeviceStateStore } from "@/stores/DeviceStateStore";
 import DoneIcon from "@/assets/icons/DoneIcon.vue";
 import SendIcon from "@/assets/icons/SendIcon.vue";
 import { snackbar } from "mdui/functions/snackbar";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const props = defineProps<{
     device: DeviceInfo;
@@ -27,7 +30,7 @@ function connectToDevice() {
         .catch((e) => {
             console.error(e);
             snackbar({
-                message: "Failed to connect to device",
+                message: t("failedConnect"),
             });
         })
         .finally(() => {

@@ -41,15 +41,18 @@ function closeWindow() {
         <div
             class="relative flex justify-center items-center error-container h-10 close"
         >
-            <mdui-button variant="text" class="error-text" @click="closeWindow"
-                >Close</mdui-button
+            <mdui-button
+                variant="text"
+                class="error-text"
+                @click="closeWindow"
+                >{{ $t("close") }}</mdui-button
             >
         </div>
         <div
             class="w-full flex items-center justify-center"
             v-if="!taskQueueStore.queueRunning"
         >
-            <p class="text-center text-gray-500">Queue Stopped</p>
+            <p class="text-center text-gray-500">{{ $t("queueStopped") }}</p>
         </div>
         <div class="flex flex-col" v-else>
             <mdui-list>
@@ -81,7 +84,7 @@ function closeWindow() {
             @click="onTop = !onTop"
         >
             <mdui-checkbox :checked="onTop" />
-            Always on top
+            {{ $t("alwaysOnTop") }}
         </div>
     </div>
 </template>

@@ -1,0 +1,29 @@
+{
+  "appName": "Maa Resonance",
+  "connectedDevice": "Connected Device",
+  "noDevice": "No device connected",
+  "searching": "Searching for devices...",
+  "noDeviceFound": "No devices found",
+  "rescan": "Rescan Devices",
+  "availableDevices": "Available Devices",
+  "stop": "Stop",
+  "start": "Start",
+  "noTasks": "No tasks to run",
+  "failedToStartMiniWindow": "Failed to start mini window",
+  "miniWindow": "Mini Window",
+  "failedGetConfig": "Failed to get MAA config: {err}",
+  "notReady": "MAA is not ready for tasks",
+  "noTaskInQueue": "No tasks in queue",
+  "settings": {
+    "times": "Times",
+    "noParams": "This task contains no parameters.",
+    "adbTouch": "Adb Touch Type",
+    "adbScreencap": "Adb Screencap Type",
+    "appSettings": "App"
+  },
+  "close": "Close",
+  "queueStopped": "Queue Stopped",
+  "alwaysOnTop": "Always on top",
+  "remove": "Remove",
+  "failedConnect": "Failed to connect to device"
+}

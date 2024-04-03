@@ -28,7 +28,10 @@ function removeCurrent() {
                 class="flex flex-col w-full h-full layer"
             >
                 <div class="flex flex-row items-center justify-center">
-                    <mdui-icon v-if="task.state === 'Completed'" style="color:green">
+                    <mdui-icon
+                        v-if="task.state === 'Completed'"
+                        style="color: green"
+                    >
                         <DoneIcon />
                     </mdui-icon>
                     <mdui-icon
@@ -46,7 +49,9 @@ function removeCurrent() {
                 ></mdui-linear-progress>
             </mdui-card>
             <mdui-menu>
-                <mdui-menu-item @click="removeCurrent"> Remove </mdui-menu-item>
+                <mdui-menu-item @click="removeCurrent">
+                    {{ $t("remove") }}
+                </mdui-menu-item>
             </mdui-menu>
         </mdui-dropdown>
     </div>

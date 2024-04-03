@@ -5,14 +5,17 @@ import TaskQueue from "./TaskQueue.vue";
 import TaskSettings from "./TaskSettings.vue";
 import TaskCommand from "./TaskCommand.vue";
 import { snackbar } from "mdui/functions/snackbar";
+import { useI18n } from "vue-i18n";
 
 const maaStateStore = useMaaStateStore();
+
+const { t } = useI18n();
 
 onMounted(() => {
     maaStateStore.getConfig().catch((err) => {
         snackbar({
-            message: "Failed to get MAA config: " + err,
-        })
+            message: t("failedGetConfig", { err: err }),
+        });
     });
 });
 </script>
@@ -21,13 +24,13 @@ onMounted(() => {
     <div v-if="maaStateStore.isMaaReady" class="flex flex-col">
         <task-queue class="w-full h-2/5" />
         <div class="flex w-full gap-2 h-full">
-            <task-command class="w-1/5 h-fit"/>
+            <task-command class="w-1/5 h-fit" />
             <task-settings class="flex-grow h-fit" />
         </div>
     </div>
     <div v-else class="h-1/3" justify="center">
         <p class="text-center text-gray-400 text-4xl">
-            MAA is not ready for tasks
+            {{ $t("notReady") }}
         </p>
     </div>
 </template>

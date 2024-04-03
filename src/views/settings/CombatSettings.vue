@@ -10,7 +10,7 @@ const config = maaStateStore.config?.combat;
         <mdui-list class="w-full">
             <mdui-list-item class="settings_item" nonclickable>
                 <div class="flex flex-row justify-around">
-                    <p class="label">Times</p>
+                    <p class="label">{{ $t("settings.times") }}</p>
                     <mdui-text-field
                         :value="config?.times"
                         class="option"

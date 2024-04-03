@@ -33,11 +33,11 @@ function loadDevices() {
 <template>
     <div class="flex flex-col h-full container">
         <div class="flex justify-center">
-            <p :class="connectedDeviceTitleClass">Connected Device</p>
+            <p :class="connectedDeviceTitleClass">{{ $t('connectedDevice') }}</p>
         </div>
 
         <div class="flex flex-col" v-if="!deviceStateStore.isDeviceConnected">
-            <p class="text_small">No device connected</p>
+            <p class="text_small">{{ $t('noDevice') }}</p>
         </div>
 
         <device-item v-else :device="deviceStateStore.connectedDevice!" />
@@ -46,20 +46,19 @@ function loadDevices() {
             class="title_secondary flex flex-row items-center align-middle justify-center"
             v-if="loadingDevices"
         >
-            <mdui-circular-progress></mdui-circular-progress>Searching
-            for devices...
+            <mdui-circular-progress></mdui-circular-progress>{{ $t('searching') }}
         </div>
         <div
             class="flex flex-col"
             v-else-if="deviceStateStore.devices.length == 0"
         >
-            <p class="title_secondary">No devices found</p>
+            <p class="title_secondary">{{ $t('noDeviceFound') }}</p>
             <mdui-button @click="loadDevices" strong variant="filled" class="mx-4">
-                Rescan Devices
+                {{ $t('rescan') }}
             </mdui-button>
         </div>
         <div class="flex flex-col justify-center items-center" v-else>
-            <p>Available Devices</p>
+            <p>{{ $t('availableDevices') }}</p>
             <mdui-list class="device_list">
                 <mdui-list-item
                     v-for="device in deviceStateStore.devices"

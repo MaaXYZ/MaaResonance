@@ -14,11 +14,15 @@ const config = maaStateStore.config?.appConfig;
         <mdui-list>
             <mdui-list-item nonclickable class="settings_item">
                 <div>
-                    <p class="label">Adb Touch Type</p>
+                    <p class="label">{{ $t("settings.adbTouch") }}</p>
                     <mdui-select
-                    class="option"
+                        class="option"
                         :value="config?.adb_controller_type.touch_type"
-                        @change="maaStateStore.setControllerTouchType($event.target.value)"
+                        @change="
+                            maaStateStore.setControllerTouchType(
+                                $event.target.value
+                            )
+                        "
                     >
                         <mdui-menu-item
                             v-for="ty in maaAdbControllerTouchTypes"
@@ -32,11 +36,15 @@ const config = maaStateStore.config?.appConfig;
             </mdui-list-item>
             <mdui-list-item nonclickable class="settings_item">
                 <div>
-                    <p class="label">Adb Screencap Type</p>
+                    <p class="label">{{ $t("settings.adbScreencap") }}</p>
                     <mdui-select
                         class="option"
                         :value="config?.adb_controller_type.screencap_type"
-                        @change="maaStateStore.setControllerScreencapType($event.target.value)"
+                        @change="
+                            maaStateStore.setControllerScreencapType(
+                                $event.target.value
+                            )
+                        "
                     >
                         <mdui-menu-item
                             v-for="ty in maaAdbControllerScreencapTypes"
@@ -70,5 +78,4 @@ mdui-select {
     position: absolute;
     right: 0;
 }
-
 </style>

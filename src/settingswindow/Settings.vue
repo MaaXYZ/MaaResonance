@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { useMaaStateStore } from "@/stores/MaaStateStore";
 import { defineAsyncComponent, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 const maaStateStore = useMaaStateStore();
 
+const {t} = useI18n();
+
 const settingSections = {
-    App: defineAsyncComponent(() => import("./AppSettings.vue")),
-    Demo: defineAsyncComponent(() => import("./DemoAnotherSettings.vue")),
+    App: {component:defineAsyncComponent(() => import("./AppSettings.vue")),name:t("settings.appSettings")},
 };
 
 type SettingSections = keyof typeof settingSections;
 
-const activeSetting = ref<SettingSections>("App");
+const activeSetting = ref<SettingSections>(t("settings.appSettings") as SettingSections);
 
 onMounted(() => {
     maaStateStore.getConfig();
