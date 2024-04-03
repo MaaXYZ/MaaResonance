@@ -6,7 +6,7 @@ use tracing::{error, info, trace, trace_span};
 use crate::{
     callback::CallbackEventHandler,
     config::Config,
-    task::{TaskRunningState, TaskStatus, TaskType},
+    task::{CombatParam, TaskRunningState, TaskStatus, TaskType},
 };
 
 #[derive(Default, Serialize, Deserialize)]
@@ -82,7 +82,12 @@ impl TaskQueue {
             let entry = task.task_type.get_string();
 
             let id = match task.task_type {
-                TaskType::StartUp | TaskType::Combat => handle.post_task(&entry, json!({})),
+                TaskType::StartUp  => handle.post_task(&entry, json!({})),
+                TaskType::Combat => {
+                    let config = config.combat;
+                    let param: CombatParam = config.into();
+                    handle.post_task(&entry, param)
+                }
             };
             task.id = Some(id);
             true

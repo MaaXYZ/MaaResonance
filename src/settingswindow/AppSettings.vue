@@ -18,10 +18,10 @@ const config = maaStateStore.config?.appConfig;
                     <mdui-select
                     class="option"
                         :value="config?.adb_controller_type.touch_type"
+                        @change="maaStateStore.setControllerTouchType($event.target.value)"
                     >
                         <mdui-menu-item
                             v-for="ty in maaAdbControllerTouchTypes"
-                            @change="maaStateStore.setControllerTouchType(ty)"
                             :key="ty"
                             :value="ty"
                         >
@@ -36,12 +36,10 @@ const config = maaStateStore.config?.appConfig;
                     <mdui-select
                         class="option"
                         :value="config?.adb_controller_type.screencap_type"
+                        @change="maaStateStore.setControllerScreencapType($event.target.value)"
                     >
                         <mdui-menu-item
                             v-for="ty in maaAdbControllerScreencapTypes"
-                            @change="
-                                maaStateStore.setControllerScreencapType(ty)
-                            "
                             :key="ty"
                             :value="ty"
                         >

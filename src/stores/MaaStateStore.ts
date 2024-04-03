@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { useDeviceStateStore } from "./DeviceStateStore";
 import { MaaConfig } from "@/interface/MaaConfig";
 import CommandInvoker from "@/CommandInvoker";
-import { ClientType } from "@/interface/StartUpConfig";
 import {
     MaaAdbControllerScreencapType,
     MaaAdbControllerKeyType,
@@ -33,11 +32,10 @@ export const useMaaStateStore = defineStore("maa-state", {
                 this.config = config;
             });
         },
-        async setClientType(clientType: ClientType) {
-            if (this.config) {
-                this.config.startUp.clientType = clientType;
-            }
-            CommandInvoker.setClientType(clientType);
+        async setCombatTimes(times: number) {
+            CommandInvoker.setCombatTimes(times).then(() => {
+                this.getConfig();
+            });
         },
         async setControllerTouchType(touchType: MaaAdbControllerTouchType) {
             if (this.config) {
@@ -45,7 +43,9 @@ export const useMaaStateStore = defineStore("maa-state", {
                     ...this.config.appConfig.adb_controller_type,
                     touch_type: touchType,
                 };
-                CommandInvoker.setControllerType(updatedConfig);
+                CommandInvoker.setControllerType(updatedConfig).then(() => {
+                    this.getConfig();
+                });
             }
         },
         async setControllerKeyType(keyType: MaaAdbControllerKeyType) {
@@ -54,16 +54,22 @@ export const useMaaStateStore = defineStore("maa-state", {
                     ...this.config.appConfig.adb_controller_type,
                     key_type: keyType,
                 };
-                CommandInvoker.setControllerType(updatedConfig);
+                CommandInvoker.setControllerType(updatedConfig).then(() => {
+                    this.getConfig();
+                });
             }
         },
-        async setControllerScreencapType(screencapType: MaaAdbControllerScreencapType) {
+        async setControllerScreencapType(
+            screencapType: MaaAdbControllerScreencapType
+        ) {
             if (this.config) {
                 const updatedConfig = {
                     ...this.config.appConfig.adb_controller_type,
                     screencap_type: screencapType,
                 };
-                CommandInvoker.setControllerType(updatedConfig);
+                CommandInvoker.setControllerType(updatedConfig).then(() => {
+                    this.getConfig();
+                });
             }
         },
     },

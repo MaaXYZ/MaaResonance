@@ -4,13 +4,16 @@ use serde::{Deserialize, Serialize};
 
 use crate::MaaZInnerResult;
 
-use self::app::AppConfig;
+use self::{app::AppConfig, combat::CombatConfig};
 
 pub mod app;
+pub mod combat;
 
 #[derive(Serialize, Deserialize, Default, Clone, Copy)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
+    #[serde(default)]
+    pub combat: CombatConfig,
     #[serde(default)]
     pub app_config: AppConfig,
 }

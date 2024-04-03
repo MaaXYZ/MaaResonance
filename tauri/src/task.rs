@@ -2,7 +2,7 @@ use maa_framework::instance::TaskParam;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-use crate::MaaZError;
+use crate::{config::combat::CombatConfig, MaaZError};
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub enum TaskRunningState {
@@ -59,3 +59,29 @@ macro_rules! task_type {
 }
 
 task_type!(StartUp, Combat);
+
+pub struct CombatParam {
+    pub times: u32,
+}
+
+impl From<CombatConfig> for CombatParam {
+    fn from(config: CombatConfig) -> Self {
+        Self { times: config.times }
+    }
+}
+
+impl Serialize for CombatParam {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        json!({
+            "StartCombat": {
+                "times_limit": self.times
+            }
+        })
+        .serialize(serializer)
+    }
+}
+
+impl TaskParam for CombatParam {}

@@ -19,6 +19,9 @@ import 'mdui/components/tab-panel'
 import 'mdui/components/dropdown'
 import 'mdui/components/menu'
 import 'mdui/components/menu-item'
+import 'mdui/components/list'
+import 'mdui/components/list-item'
+import 'mdui/components/text-field'
 
 const app = createApp(App);
 

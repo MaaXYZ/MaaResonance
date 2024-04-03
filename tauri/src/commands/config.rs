@@ -47,3 +47,5 @@ config_writer!(
     adb_controller_type,
     MaaAdbControllerType
 );
+
+config_writer!(set_combat_times,combat,times,u32);

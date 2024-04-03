@@ -71,6 +71,12 @@ export default class CommandInvoker {
         });
     }
 
+    public static async setCombatTimes(times: number): Promise<void> {
+        return invoke("set_combat_times", {
+            value: times,
+        });
+    }
+
     public static async startMiniWindow(): Promise<void> {
         return invoke("start_mini_window");
     }
