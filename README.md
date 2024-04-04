@@ -1,6 +1,6 @@
-# MaaFramework Tauri Template
+# Maa Resonance Tauri Template
 
-This is a template for creating a MaaFramework front end with Tauri.
+This is a project for creating a Maa Resonance front end with Tauri.
 
 ## Getting Started
 
