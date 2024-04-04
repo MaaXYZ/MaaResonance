@@ -40,6 +40,7 @@ export default defineConfig(async () => ({
                 settingswindow: resolve(__dirname, "settings.html"),
             },
         },
+        // for top level await
         target: "esnext",
     },
 }));

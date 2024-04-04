@@ -10,6 +10,16 @@
             "MaaUtils.dll",
             "onnxruntime_maa.dll",
             "opencv_world4_maa.dll"
-        ]
+        ],
+        "windows": {
+            "allowDowngrades": false,
+            "nsis": {
+                "languages": ["SimpChinese", "English"],
+                "displayLanguageSelector": true
+            },
+            "webviewInstallMode": {
+                "type": "skip"
+            }
+        }
     }
 }

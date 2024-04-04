@@ -1,8 +1,8 @@
 [package]
 name = "maa-resonance"
-version = "0.0.0"
+version = "0.0.1"
 description = "Automation tool for Resonance."
-authors = ["SmgPie <"]
+authors = ["MaaResonance Team"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -34,6 +34,13 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 # DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
 mock = []
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+opt-level = "z"
 
 [lints.clippy]
 "pedantic" = { level = "warn", priority = -1 }
@@ -103,8 +110,3 @@ mock = []
 "tests_outside_test_module" = "deny"
 "undocumented_unsafe_blocks" = "deny"
 "unseparated_literal_suffix" = "deny"
-
-[profile.release]
-lto = true
-codegen-units = 1
-panic = "abort"
