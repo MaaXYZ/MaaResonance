@@ -75,9 +75,14 @@ impl Serialize for CombatParam {
     where
         S: serde::ser::Serializer,
     {
+        let times = if self.times == 0 {
+            u32::MAX
+        } else {
+            self.times
+        };
         json!({
             "StartCombat": {
-                "times_limit": self.times
+                "times_limit": times
             }
         })
         .serialize(serializer)

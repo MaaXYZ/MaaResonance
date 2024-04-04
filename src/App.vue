@@ -48,11 +48,8 @@ function toggleTheme() {
 
 <template>
     <mdui-layout class="h-screen w-full flex flex-col select-none">
-        <mdui-top-app-bar
-            data-tauri-drag-region
-            class=""
-        >
-            <mdui-top-app-bar-title>{{ $t("appName") }}</mdui-top-app-bar-title>
+        <mdui-top-app-bar data-tauri-drag-region>
+            <mdui-top-app-bar-title data-tauri-drag-region>{{ $t("appName") }}</mdui-top-app-bar-title>
             <div class="controls">
                 <mdui-button-icon @click="openSettings">
                     <mdui-icon>
