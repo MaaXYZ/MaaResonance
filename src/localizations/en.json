@@ -21,6 +21,10 @@
     "adbScreencap": "Adb Screencap Type",
     "appSettings": "App"
   },
+  "tasks": {
+    "startUp": "Start Up",
+    "combat": "Combat"
+  },
   "close": "Close",
   "queueStopped": "Queue Stopped",
   "alwaysOnTop": "Always on top",

@@ -31,7 +31,7 @@ function loadDevices() {
 </script>
 
 <template>
-    <div class="flex flex-col h-full container">
+    <mdui-card class="flex flex-col h-full container">
         <div class="flex justify-center">
             <p :class="connectedDeviceTitleClass">{{ $t('connectedDevice') }}</p>
         </div>
@@ -68,7 +68,7 @@ function loadDevices() {
                 </mdui-list-item>
             </mdui-list>
         </div>
-    </div>
+    </mdui-card>
 </template>
 
 <style scoped>

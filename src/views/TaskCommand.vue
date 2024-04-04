@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useTaskQueueStore } from "@/stores/TaskQueueStore";
 import { computed } from "vue";
-import { TaskType, allTaskTypes } from "@/interface/TaskStatus";
+import { TaskType, allTaskTypesContent } from "@/interface/TaskStatus";
 import CommandInvoker from "@/CommandInvoker";
 import { useMaaStateStore } from "@/stores/MaaStateStore";
 import PlayArrowIcon from "@/assets/icons/PlayArrowIcon.vue";
@@ -74,17 +74,17 @@ function startMiniWindow() {
             @click="startMiniWindow"
             >{{ $t("miniWindow") }}</mdui-button
         >
-        <div class="h-2" />
+        <div class="h-2" ></div>
         <mdui-button
             variant="tonal"
             secondary
             type="primary"
             class="w-full mb-2"
-            v-for="task in allTaskTypes"
+            v-for="(name,task) in allTaskTypesContent"
             :key="task"
             @click="addTask(task)"
         >
-            {{ task }}
+            {{ $t(name) }}
         </mdui-button>
     </mdui-card>
 </template>

@@ -25,5 +25,9 @@
   "stop": "停止",
   "remove": "移除",
   "noTasks": "队列是空的",
-  "notReady": "MAA还未准备好"
+  "notReady": "MAA还未准备好",
+  "tasks": {
+    "combat": "战斗",
+    "startUp": "启动"
+  }
 }
