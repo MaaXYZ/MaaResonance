@@ -32,6 +32,3 @@ tauri/*.dll
 tauri/target
 # Tauri generated files
 tauri/gen
-
-# Executable files
-*.exe
