@@ -9,6 +9,7 @@ import zipfile
 # Dependency versions
 maafw_version = "v1.7.0-alpha.2"
 
+
 def copy_file_recursively(src, dst, system):
     if os.path.isdir(src):
         if not os.path.exists(dst):
@@ -22,6 +23,7 @@ def copy_file_recursively(src, dst, system):
             os.system("copy " + src + " " + dst)
         else:
             os.system("cp " + src + " " + dst)
+
 
 def download(url: str, fname: str, chunk_size=1024):
     resp = requests.get(url, stream=True)
@@ -37,10 +39,11 @@ def download(url: str, fname: str, chunk_size=1024):
             size = file.write(data)
             bar.update(size)
 
+
 def figure_triplet():
     supported_triplets = {
-        "windows": ["x86_64","aarch64"],
-        "linux": ["x86_64","aarch64"],
+        "windows": ["x86_64", "aarch64"],
+        "linux": ["x86_64", "aarch64"],
         # may add macos support in the future
     }
 
@@ -60,12 +63,14 @@ def figure_triplet():
 
     return host_system, host_arch
 
+
 def setup_deps_dir():
     deps_dir = "deps"
     if not os.path.exists(deps_dir):
         os.makedirs(deps_dir)
 
     return deps_dir
+
 
 def setup_maafw_dynamic_libs(host_system, fw_dir):
     needed_libs = [
@@ -80,6 +85,7 @@ def setup_maafw_dynamic_libs(host_system, fw_dir):
     lib_dir = os.path.join(fw_dir, "bin")
     copy_file_recursively(lib_dir, os.path.join("tauri"), host_system)
 
+
 def setup_maafw(host_system, host_arch, dst, force=False):
     print("Setting up MAA Framework")
     print("Downloading MAA Framework " + maafw_version)
@@ -88,8 +94,10 @@ def setup_maafw(host_system, host_arch, dst, force=False):
         print("MAA Framework already downloaded")
     else:
         maafw_base_url = "https://github.com/MaaAssistantArknights/MaaFramework/releases/download/"
-        triplet_string = ("win" if host_system == "windows" else host_system) + "-" + host_arch
-        maafw_url = maafw_base_url + maafw_version + "/MAA-" + triplet_string + "-" + maafw_version + ".zip"
+        triplet_string = ("win" if host_system ==
+                          "windows" else host_system) + "-" + host_arch
+        maafw_url = maafw_base_url + maafw_version + "/MAA-" + \
+            triplet_string + "-" + maafw_version + ".zip"
         print("Downloading from " + maafw_url)
         download(maafw_url, maafw_zip)
 
@@ -111,7 +119,8 @@ def main():
     host_system, host_arch = figure_triplet()
     print("Setting up dependencies for " + host_system + "-" + host_arch)
     triplet_dir = setup_deps_dir()
-    setup_maafw(host_system, host_arch, triplet_dir,force)
+    setup_maafw(host_system, host_arch, triplet_dir, force)
+
 
 if __name__ == "__main__":
     main()
