@@ -44,20 +44,15 @@ function toggleTheme() {
         theme.value = "light";
     }
 }
-
 </script>
 
 <template>
-    <div class="h-screen w-full flex flex-col select-none">
-        <div
+    <mdui-layout class="h-screen w-full flex flex-col select-none">
+        <mdui-top-app-bar
             data-tauri-drag-region
-            class="app-heade h-10 select-none flex flex-row items-center justify-between p-2"
+            class=""
         >
-            <div class="header">
-                <span class="text-lg text-center font-bold">{{
-                    $t("appName")
-                }}</span>
-            </div>
+            <mdui-top-app-bar-title>{{ $t("appName") }}</mdui-top-app-bar-title>
             <div class="controls">
                 <mdui-button-icon @click="openSettings">
                     <mdui-icon>
@@ -85,24 +80,22 @@ function toggleTheme() {
                     </mdui-icon>
                 </mdui-button-icon>
             </div>
-        </div>
-        <div class="flex flex-row flex-grow">
+        </mdui-top-app-bar>
+        <mdui-layout-item placement="left">
             <device-connection class="conn" />
+        </mdui-layout-item>
+        <mdui-layout-main class="flex flex-row flex-grow">
             <task-dispatch class="taskd" />
-        </div>
-    </div>
+        </mdui-layout-main>
+    </mdui-layout>
 </template>
 
 <style scoped>
 .conn {
-    width: 30%;
+    width: 30vw;
 }
 
 .taskd {
-    width: 70%;
-}
-
-.app_header {
-    background-color: var(--md-sys-color-surface);
+    width: 70vw;
 }
 </style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CloseIcon from "@/assets/icons/CloseIcon.vue";
 import DoneIcon from "@/assets/icons/DoneIcon.vue";
-import TaskStatus from "@/interface/TaskStatus";
+import TaskStatus, { allTaskTypesContent } from "@/interface/TaskStatus";
 import { useTaskQueueStore } from "@/stores/TaskQueueStore";
 
 const taskQueueStore = useTaskQueueStore();
@@ -17,7 +17,7 @@ function removeCurrent() {
 </script>
 
 <template>
-    <div ref="outer" class="item mx-1 text-center items-center shadow relative">
+    <div ref="outer" class="item mx-1 text-center items-center">
         <mdui-dropdown
             :trigger="task.state === 'Running' ? 'manual' : 'contextmenu'"
             placement="bottom-end"
@@ -41,7 +41,7 @@ function removeCurrent() {
                         <CloseIcon />
                     </mdui-icon>
                     <p>
-                        {{ props.task.taskType }}
+                        {{ $t(allTaskTypesContent[props.task.taskType]) }}
                     </p>
                 </div>
                 <mdui-linear-progress
@@ -62,7 +62,5 @@ function removeCurrent() {
     min-width: 150px;
     width: 150px;
     height: 60px;
-    border-radius: 0.5rem;
-    background-color: var(--md-ref-palette-neutral95);
 }
 </style>
