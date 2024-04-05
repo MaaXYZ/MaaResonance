@@ -4,6 +4,12 @@
 
 这是一个用tauri创建的Maa Resonance前端项目。
 
+## 项目目标 （大饼）
+
+- 自动跑商
+  - 根据不同策略消耗疲劳度来选择不同路线
+- 清理澄明度
+
 ## 快速开始
 
 请注意当前版本构建只在 Windows 测试过。 对 Linux 系统的支持在进行中。
@@ -27,7 +33,7 @@ git submodule update
 
 如果你已经拥有了安装后的 MaaFramework，你可以跳过该步骤并且手动复制 MaaFramework 的所有 dlls 到 `tauri/` 目录下
 
-如果没有，你可以运行 `makedeps.py` 来下载并提取最新版本的 MaaFramework 到 `tauri/` 目录下。然后，如上一步所说，你需要添加环境变量指向脚本安装的 MaaFramework 目录，即 `$projectDir/deps/maafw`。
+如果没有，你可以运行 `makedeps.py` 来下载并提取最新版本的 MaaFramework 到 `tauri/` 目录下。然后，如上一步所说，你需要添加环境变量指向脚本安装的 MaaFramework 目录，即 `$projectDir/scripts/deps/maafw`。
 
 Cmake 和 clang (你可以用LLVM来替代) 同样需要安装，否则在构建过程中会抛出错误。
 
