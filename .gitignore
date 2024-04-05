@@ -23,8 +23,6 @@ dist-ssr
 *.sw?
 
 # Dependency directories and rust generated files
-scripts/deps
-scripts/tauri
 deps
 tauri/config
 tauri/debug
