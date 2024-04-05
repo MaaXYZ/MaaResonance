@@ -33,7 +33,13 @@ If you don't have it installed, the python script will do that anyway so there i
 
 If you have an installed version of MaaFramework, you can skip this step and manually copy the MaaFramework dlls to `tauri/` directory.  
 
-If not, you can run the `./scripts/makedeps.py` script to download and extract the latest version of MaaFramework to the `tauri/` directory. Then, as said above, you might need to set your PATH environment variables to point to the MaaFramework installation directory (`$projectDir/scripts/deps/maafw`).
+If not, you can run 
+
+```bash
+python ./scripts/makedeps.py
+```
+
+ to download and extract the latest version of MaaFramework to the `tauri/` directory. Then, as said above, you might need to set your PATH environment variables to point to the MaaFramework installation directory (`$projectDir/scripts/deps/maafw`).
 
 Cmake and clang ( you can choose LLVM to instead ) is also needed.
 
