@@ -1,6 +1,6 @@
 {
   "alwaysOnTop": "置顶窗口",
-  "appName": "MAA Resonance",
+  "appName": "Maa Resonance",
   "availableDevices": "可连接设备",
   "close": "关闭",
   "connectedDevice": "已连接的设备",
@@ -25,7 +25,7 @@
   "stop": "停止",
   "remove": "移除",
   "noTasks": "队列是空的",
-  "notReady": "MAA还未准备好",
+  "notReady": "Maa Resonance 还尚未就绪",
   "tasks": {
     "combat": "战斗",
     "startUp": "启动"
