@@ -1,4 +1,4 @@
-# Maa Resonance Tauri Front End
+# Maa Resonance
 
 [简体中文](/README_zh.md) | [English](/README.md)
 
@@ -6,8 +6,8 @@ This is a project for creating a Maa Resonance front end with Tauri.
 
 ## Project Goals
 
--  Automated Business Running
-   -  Choose different routes according to the fatigue level consumed by different strategies
+- Automated Business Running
+  - Choose different routes according to the fatigue level consumed by different strategies
 - clear daily affairs
 
 ## Getting Started
@@ -25,7 +25,7 @@ git submodule update
 
 ### MaaFramework
 
-You need to have a latest version of MaaFramework installed in your system. If you already have, make sure that CMake can find it. The easiest way to do this is to add your MaaFramework installation directory to your `CMAKE_PREFIX_PATH` or `PATH` environment variable.
+You need to have a latest version (expected v1.7.*) of MaaFramework installed in your system. If you already have, make sure that CMake can find it. The easiest way to do this is to add your MaaFramework installation directory to your `CMAKE_PREFIX_PATH` or `PATH` environment variable.
 
 If you don't have it installed, the python script will do that anyway so there is generally no need for you to do it manually.
 
@@ -33,7 +33,7 @@ If you don't have it installed, the python script will do that anyway so there i
 
 If you have an installed version of MaaFramework, you can skip this step and manually copy the MaaFramework dlls to `tauri/` directory.  
 
-If not, you can run 
+If not, you can run
 
 ```bash
 python ./scripts/makedeps.py
@@ -64,6 +64,10 @@ Then build the project with:
 pnpm tauri build
 ```
 
-## Note
+To build the project for production, use:
 
-This project assumes AdbController but with some modifications, you should be able to use any other controller as well.
+```bash
+pnpm build
+```
+
+This will build different targets.

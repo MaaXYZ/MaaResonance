@@ -1,4 +1,4 @@
-# Maa Resonance Tauri Front End
+# Maa Resonance
 
 [简体中文](/README_zh.md) | [English](/README.md)
 
@@ -25,15 +25,15 @@ git submodule update
 
 ### MaaFramework
 
-你需要安装一个最新版本的 MaaFramework 在你的系统内。如果你已经有了，请确保 Cmake能够找到它。做这件事最简单的方法是将你安装 MaaFramework 的目录加到 `CMAKE_PREFIX_PATH` 或者 `PATH` 环境变量里。
+你需要安装最新版本的 MaaFramework（v1.7.*）。如果已经安装，请确保 CMake能够找到它。最简单的方法是将 MaaFramework 的安装目录添加到 `CMAKE_PREFIX_PATH` 或 `PATH` 环境变量中。
 
-如果你没有安装，python 脚本将会帮你生成，所以其实没有手动安装的必要。
+如果你没有安装，python 脚本将会安装，没有手动安装的必要。
 
 ### 运行依赖脚本
 
-如果你已经拥有了安装后的 MaaFramework，你可以跳过该步骤并且手动复制 MaaFramework 的所有 dlls 到 `tauri/` 目录下
+如果你已经拥有了安装后的 MaaFramework，你可以跳过该步骤并且手动复制 MaaFramework 的所有 dll 到 `tauri/` 目录下
 
-如果没有，你可以运行如下指令
+否则可以运行如下指令
 
 ```bash
 python ./scripts/makedeps.py
@@ -41,17 +41,18 @@ python ./scripts/makedeps.py
 
  来下载并提取最新版本的 MaaFramework 到 `tauri/` 目录下。然后，如上一步所说，你需要添加环境变量指向脚本安装的 MaaFramework 目录，即 `$projectDir/scripts/deps/maafw`。
 
-Cmake 和 clang (你可以用LLVM来替代) 同样需要安装，否则在构建过程中会抛出错误。
+CMake 和 clang (你可以用LLVM来替代) 同样需要安装。
 
 ### 构建并运行
 
-推荐使用 `pnpm` ，当然你也可以使用 `npm` 或者 `yarn`
+推荐使用 `pnpm` ，也可以使用 `npm` 或者 `yarn`
 
 ```bash
 pnpm install  
 pnpm tauri dev
 ```
-或者提供一个 `mock` 命令，我们不会尝试真正扫描设备，而是显示一个模拟设备，这对用户界面开发非常有用。
+
+我们还提供 `mock` 命令，用于在扫描时显示一个模拟设备，这对UI开发非常有用。
 
 ```bash
 pnpm mock
@@ -62,7 +63,3 @@ pnpm mock
 ```bash
 pnpm tauri build
 ```
-
-## Note
-
-本项目假定使用 AdbController，但稍作修改后，也可以使用任何其他控制器。
