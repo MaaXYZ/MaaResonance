@@ -49,3 +49,5 @@ config_writer!(
 );
 
 config_writer!(set_combat_times,combat,times,u32);
+
+config_writer!(set_use_fuel, drive_combat, use_fuel, bool);

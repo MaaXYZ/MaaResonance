@@ -2,7 +2,7 @@ use maa_framework::instance::TaskParam;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-use crate::{config::combat::CombatConfig, MaaZError};
+use crate::{config::{combat::CombatConfig, drive_combat::DriveCombatConfig}, MaaZError};
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub enum TaskRunningState {
@@ -58,7 +58,7 @@ macro_rules! task_type {
     };
 }
 
-task_type!(StartUp, Combat);
+task_type!(StartUp, Combat, DriveCombat);
 
 pub struct CombatParam {
     pub times: u32,
@@ -81,7 +81,7 @@ impl Serialize for CombatParam {
             self.times
         };
         json!({
-            "StartCombat": {
+            "GoToCombat": {
                 "times_limit": times
             }
         })
@@ -90,3 +90,43 @@ impl Serialize for CombatParam {
 }
 
 impl TaskParam for CombatParam {}
+
+pub struct DriveCombatParam {
+    pub use_fuel: bool,
+}
+
+impl From<DriveCombatConfig> for DriveCombatParam {
+    fn from(config: DriveCombatConfig) -> Self {
+        Self {
+            use_fuel: config.use_fuel,
+        }
+    }
+}
+
+impl Serialize for DriveCombatParam {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        if self.use_fuel {
+            json!({
+                "Sub_CheckDrivingSituation": {
+                    "next": [
+                        "UseBullet",
+                        "Sub_DuringStop"
+                    ]
+                }
+            }).serialize(serializer)
+        } else {
+            json!({
+                "Sub_CheckDrivingSituation": {
+                    "next": [
+                        "Sub_DuringStop"
+                    ]
+                }
+            }).serialize(serializer)
+        }
+    }
+}
+
+impl TaskParam for DriveCombatParam {}

@@ -19,7 +19,8 @@
     "adbTouch": "ADB Touch方法",
     "appSettings": "应用设置",
     "noParams": "这个任务没有参数",
-    "times": "次数"
+    "times": "次数",
+    "useFuel": "使用加速"
   },
   "start": "开始",
   "stop": "停止",
@@ -28,6 +29,7 @@
   "notReady": "Maa Resonance 还尚未就绪",
   "tasks": {
     "combat": "战斗",
-    "startUp": "启动"
+    "startUp": "启动",
+    "driveCombat": "自动接敌"
   }
 }

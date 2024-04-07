@@ -32,8 +32,8 @@ export const useMaaStateStore = defineStore("maa-state", {
                 this.config = config;
             });
         },
-        async setCombatTimes(times: number) {
-            CommandInvoker.setCombatTimes(times).then(() => {
+        async setConfig(configName: string, value: any) {
+            CommandInvoker.setConfig(configName, value).then(() => {
                 this.getConfig();
             });
         },

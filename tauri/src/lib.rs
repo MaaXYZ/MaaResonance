@@ -82,6 +82,7 @@ pub fn run() {
             commands::config::get_config,
             commands::config::set_controller_type,
             commands::config::set_combat_times,
+            commands::config::set_use_fuel,
             commands::task::add_task_to_queue,
             commands::task::start_queue,
             commands::task::stop_queue,

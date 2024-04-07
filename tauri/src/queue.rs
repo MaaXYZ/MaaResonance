@@ -6,7 +6,7 @@ use tracing::{error, info, trace, trace_span};
 use crate::{
     callback::CallbackEventHandler,
     config::Config,
-    task::{CombatParam, TaskRunningState, TaskStatus, TaskType},
+    task::{CombatParam, DriveCombatParam, TaskRunningState, TaskStatus, TaskType},
 };
 
 #[derive(Default, Serialize, Deserialize)]
@@ -86,6 +86,11 @@ impl TaskQueue {
                 TaskType::Combat => {
                     let config = config.combat;
                     let param: CombatParam = config.into();
+                    handle.post_task(&entry, param)
+                }
+                TaskType::DriveCombat => {
+                    let config = config.drive_combat;
+                    let param: DriveCombatParam = config.into();
                     handle.post_task(&entry, param)
                 }
             };

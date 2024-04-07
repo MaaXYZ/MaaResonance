@@ -19,11 +19,13 @@
     "noParams": "This task contains no parameters.",
     "adbTouch": "Adb Touch Type",
     "adbScreencap": "Adb Screencap Type",
-    "appSettings": "App"
+    "appSettings": "App",
+    "useFuel": "Use Fuel"
   },
   "tasks": {
     "startUp": "Start Up",
-    "combat": "Combat"
+    "combat": "Combat",
+    "driveCombat": "Drive Combat"
   },
   "close": "Close",
   "queueStopped": "Queue Stopped",

@@ -1,0 +1,87 @@
+{
+    "Drive_Combat": {
+        "next": [
+            "IsArrived",
+            "Sub_CheckDrivingSituation"
+        ]
+    },
+    "Sub_CheckDrivingSituation": {
+        "is_sub": true,
+        "timeout": 1000
+    },
+    "Sub_DuringStop": {
+        "timeout": 1000,
+        "next": [
+            "IsMeet_TheEnemy",
+            "ExitStation",
+            "IsStopped",
+            "StartCombat",
+            "CheckCombatFinished"
+        ]
+    },
+    "UseBullet": {
+        "recognition": "TemplateMatch",
+        "template": "Drive/Bullet.png",
+        "roi": [
+            1030,
+            626,
+            93,
+            87
+        ],
+        "action": "Click"
+    },
+    "ExitStation": {
+        "recognition": "TemplateMatch",
+        "template": "Drive/GoToDestination.png",
+        "roi": [
+            940,
+            603,
+            275,
+            74
+        ],
+        "action": "Click"
+    },
+    "IsArrived": {
+        "recognition": "TemplateMatch",
+        "template": "Drive/EnterStation.png",
+        "roi": [
+            780,
+            321,
+            202,
+            144
+        ],
+        "action": "Click"
+    },
+    "IsStopped": {
+        "recognition": "TemplateMatch",
+        "template": "Drive/SetForward.png",
+        "roi": [
+            1218,
+            588,
+            54,
+            50
+        ],
+        "action": "Click"
+    },
+    "IsMeet_TheEnemy": {
+        "recognition": "TemplateMatch",
+        "template": "Drive/IsMeet_TheEnemy.png",
+        "roi": [
+            892,
+            181,
+            226,
+            137
+        ],
+        "action": "Click"
+    },
+    "CheckIsForward": {
+        "recognition": "TemplateMatch",
+        "template": "Drive/IsForward.png",
+        "roi": [
+            1218,
+            588,
+            54,
+            50
+        ]
+    }
+}

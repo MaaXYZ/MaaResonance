@@ -71,9 +71,12 @@ export default class CommandInvoker {
         });
     }
 
-    public static async setCombatTimes(times: number): Promise<void> {
-        return invoke("set_combat_times", {
-            value: times,
+    public static async setConfig(
+        configName: string,
+        value: any
+    ): Promise<void> {
+        return invoke("set_" + configName, {
+            value: value,
         });
     }
 
