@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize, Default, Debug, Clone)]
-pub struct DriveCombatConfig {
+pub struct TravelConfig {
     #[serde(default)]
-    pub use_fuel: bool,
+    pub destination: String,
 }

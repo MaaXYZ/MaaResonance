@@ -30,6 +30,7 @@
   "tasks": {
     "combat": "战斗",
     "startUp": "启动",
-    "driveCombat": "自动接敌"
+    "driveCombat": "自动接敌",
+    "travel": "旅行"
   }
 }

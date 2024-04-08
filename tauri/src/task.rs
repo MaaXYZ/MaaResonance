@@ -1,9 +1,9 @@
-use maa_framework::{diff_task::DiffTaskBuilder, instance::TaskParam};
+use maa_framework::{diff_task::{DiffTaskBuilder, List}, instance::TaskParam};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
 use crate::{
-    config::{combat::CombatConfig, drive_combat::DriveCombatConfig},
+    config::{combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig},
     MaaZError,
 };
 
@@ -61,7 +61,7 @@ macro_rules! task_type {
     };
 }
 
-task_type!(StartUp, Combat, DriveCombat);
+task_type!(StartUp, Combat, DriveCombat, Travel);
 
 pub struct CombatParam {
     pub times: u32,
@@ -127,3 +127,33 @@ impl Serialize for DriveCombatParam {
 }
 
 impl TaskParam for DriveCombatParam {}
+
+pub struct TravelParam {
+    pub destination: String,
+}
+
+impl From<TravelConfig> for TravelParam {
+    fn from(config: TravelConfig) -> Self {
+        Self {
+            destination: config.destination,
+        }
+    }
+}
+
+impl Serialize for TravelParam {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        let task = DiffTaskBuilder::default()
+            .text(Some(List::Single(self.destination.clone())))
+            .build()
+            .ok();
+        json!({
+            "Travel":task
+        })
+        .serialize(serializer)
+    }
+}
+
+impl TaskParam for TravelParam {}

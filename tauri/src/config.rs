@@ -4,20 +4,23 @@ use serde::{Deserialize, Serialize};
 
 use crate::MaaZInnerResult;
 
-use self::{app::AppConfig, combat::CombatConfig, drive_combat::DriveCombatConfig};
+use self::{app::AppConfig, combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig};
 
 pub mod app;
 pub mod combat;
 pub mod drive_combat;
+pub mod travel;
 
 #[allow(clippy::struct_field_names)]
-#[derive(Serialize, Deserialize, Default, Clone, Copy)]
+#[derive(Serialize, Deserialize, Default, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
     #[serde(default)]
     pub combat: CombatConfig,
     #[serde(default)]
     pub drive_combat: DriveCombatConfig,
+    #[serde(default)]
+    pub travel: TravelConfig,
     #[serde(default)]
     pub app_config: AppConfig,
 }
@@ -54,7 +57,7 @@ impl ConfigHolder {
     }
 
     pub fn config(&self) -> Config {
-        self.config
+        self.config.clone()
     }
 
     pub fn write<F>(&mut self, f: F) -> MaaZInnerResult<()>
