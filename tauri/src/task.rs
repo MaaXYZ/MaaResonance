@@ -1,8 +1,11 @@
-use maa_framework::instance::TaskParam;
+use maa_framework::{diff_task::DiffTaskBuilder, instance::TaskParam};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-use crate::{config::{combat::CombatConfig, drive_combat::DriveCombatConfig}, MaaZError};
+use crate::{
+    config::{combat::CombatConfig, drive_combat::DriveCombatConfig},
+    MaaZError,
+};
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub enum TaskRunningState {
@@ -66,7 +69,9 @@ pub struct CombatParam {
 
 impl From<CombatConfig> for CombatParam {
     fn from(config: CombatConfig) -> Self {
-        Self { times: config.times }
+        Self {
+            times: config.times,
+        }
     }
 }
 
@@ -80,10 +85,12 @@ impl Serialize for CombatParam {
         } else {
             self.times
         };
+        let task = DiffTaskBuilder::default()
+            .times_limit(Some(times))
+            .build()
+            .ok();
         json!({
-            "GoToCombat": {
-                "times_limit": times
-            }
+            "GoToCombat":task
         })
         .serialize(serializer)
     }
@@ -108,24 +115,14 @@ impl Serialize for DriveCombatParam {
     where
         S: serde::ser::Serializer,
     {
-        if self.use_fuel {
-            json!({
-                "Sub_CheckDrivingSituation": {
-                    "next": [
-                        "UseBullet",
-                        "Sub_DuringStop"
-                    ]
-                }
-            }).serialize(serializer)
-        } else {
-            json!({
-                "Sub_CheckDrivingSituation": {
-                    "next": [
-                        "Sub_DuringStop"
-                    ]
-                }
-            }).serialize(serializer)
-        }
+        let task = DiffTaskBuilder::default()
+            .enabled(Some(self.use_fuel))
+            .build()
+            .ok();
+        json!({
+            "UseBullet":task
+        })
+        .serialize(serializer)
     }
 }
 

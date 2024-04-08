@@ -65,7 +65,12 @@ impl TaskQueue {
     }
 
     /// Mark the running task as completed and start the next task
-    pub fn run_next(&mut self, handle: &MaaInstance<CallbackEventHandler>, config: Config, success: bool) -> bool {
+    pub fn run_next(
+        &mut self,
+        handle: &MaaInstance<CallbackEventHandler>,
+        config: Config,
+        success: bool,
+    ) -> bool {
         let span = trace_span!("run_next");
         let _guard = span.enter();
         self.complete_running(success);
@@ -82,7 +87,7 @@ impl TaskQueue {
             let entry = task.task_type.get_string();
 
             let id = match task.task_type {
-                TaskType::StartUp  => handle.post_task(&entry, json!({})),
+                TaskType::StartUp => handle.post_task(&entry, json!({})),
                 TaskType::Combat => {
                     let config = config.combat;
                     let param: CombatParam = config.into();

@@ -20,7 +20,7 @@ tracing-subscriber = { version = "0.3.18", features = ["time", "local-time"] }
 tracing-appender = "0.2.3"
 toml = "0.8.10"
 tauri-plugin-notification = "2.0.0-beta.0"
-maa-framework = { version="0.2.4", default-features = false, features = ["adb", "toolkit", "internal"] }
+maa-framework = { version="0.3.0", default-features = false, features = ["adb", "toolkit", "internal"] }
 tauri-plugin-dialog = "2.0.0-beta.4"
 thiserror = "1.0.57"
 tauri-plugin-os = "2.0.0-beta.3"
