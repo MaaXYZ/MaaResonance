@@ -39,6 +39,7 @@ function closeWindow() {
 <template>
     <div class="select-none container h-screen">
         <div
+            data-tauri-drag-region
             class="relative flex justify-center items-center error-container h-10 close"
         >
             <mdui-button
