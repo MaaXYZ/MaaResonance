@@ -20,12 +20,14 @@
     "adbTouch": "Adb Touch Type",
     "adbScreencap": "Adb Screencap Type",
     "appSettings": "App",
-    "useFuel": "Use Fuel"
+    "useFuel": "Use Fuel",
+    "destination": "Destination"
   },
   "tasks": {
     "startUp": "Start Up",
     "combat": "Combat",
-    "driveCombat": "Drive Combat"
+    "driveCombat": "Drive Combat",
+    "travel": "Travel"
   },
   "close": "Close",
   "queueStopped": "Queue Stopped",

@@ -14,9 +14,10 @@ import "mdui/components/menu-item";
 import "mdui/components/list";
 import "mdui/components/list-item";
 import "mdui/components/text-field";
-import 'mdui/components/layout'
-import 'mdui/components/top-app-bar'
-import 'mdui/components/layout-item'
-import 'mdui/components/layout-main'
-import 'mdui/components/top-app-bar-title'
-import 'mdui/components/switch'
+import "mdui/components/layout";
+import "mdui/components/top-app-bar";
+import "mdui/components/layout-item";
+import "mdui/components/layout-main";
+import "mdui/components/top-app-bar-title";
+import "mdui/components/switch";
+import "mdui/components/select";

@@ -12,32 +12,25 @@ use crate::{
 #[tauri::command]
 pub async fn add_task_to_queue(
     task_queue: State<'_, TaskQueueState>,
+    config: State<'_, ConfigHolderState>,
     task: String,
-    append_next: Option<bool>,
 ) -> MaaZResult<()> {
     info!("Adding task {} to queue", task);
-    let append_next = append_next.unwrap_or(false);
     let mut queue = task_queue.lock().await;
     let task_type = TaskType::try_from(task)?;
-    if append_next {
-        queue.append_next(task_type);
-    } else {
-        queue.push(task_type);
-    }
-    Ok(())
+    let config = config.clone();
+    let config = config.lock().await;
+    queue.push(task_type, config.config())
 }
 
 #[tauri::command]
 pub async fn start_queue(
     task_queue: State<'_, TaskQueueState>,
     inst: State<'_, Arc<Instance>>,
-    config: State<'_, ConfigHolderState>,
 ) -> MaaZResult<()> {
     tracing::info!("Starting task queue");
     let mut queue = task_queue.lock().await;
-    let config = config.clone();
-    let config = config.lock().await;
-    let ret = queue.start(&inst, config.config());
+    let ret = queue.start(&inst);
     info!("Queue start status: {:?}", ret);
     if matches!(ret, QueueStartStatus::Started) {
         Ok(())

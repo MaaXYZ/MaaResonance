@@ -4,7 +4,9 @@ use serde::{Deserialize, Serialize};
 
 use crate::MaaZInnerResult;
 
-use self::{app::AppConfig, combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig};
+use self::{
+    app::AppConfig, combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig,
+};
 
 pub mod app;
 pub mod combat;

@@ -1,4 +1,7 @@
-use maa_framework::{diff_task::{DiffTaskBuilder, List}, instance::TaskParam};
+use maa_framework::{
+    diff_task::{DiffTaskBuilder, List},
+    instance::TaskParam,
+};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 

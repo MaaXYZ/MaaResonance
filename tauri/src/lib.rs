@@ -83,6 +83,7 @@ pub fn run() {
             commands::config::set_controller_type,
             commands::config::set_combat_times,
             commands::config::set_use_fuel,
+            commands::config::set_destination,
             commands::task::add_task_to_queue,
             commands::task::start_queue,
             commands::task::stop_queue,
@@ -136,7 +137,6 @@ fn setup_app(app: &mut App) -> MaaZInnerResult<()> {
         setup_callback(
             app_handle,
             Arc::clone(&task_queue),
-            config,
             Arc::clone(&instance),
             receiver,
         )
@@ -208,6 +208,8 @@ pub enum MaaZError {
     ResourceInitError,
     #[error("Connection Error")]
     ConnectionError,
+    #[error("Serde Error")]
+    SerdeError,
     #[error("Task Queue Did not Start")]
     QueueDidnotStart,
     #[error("Unknow Task Error: {0}")]
@@ -245,5 +247,11 @@ impl From<maa_framework::error::Error> for MaaZError {
 impl From<MaaZInnerError> for MaaZError {
     fn from(e: MaaZInnerError) -> Self {
         MaaZError::MaaZInnerError(e.to_string())
+    }
+}
+
+impl From<serde_json::Error> for MaaZError {
+    fn from(_: serde_json::Error) -> Self {
+        MaaZError::SerdeError
     }
 }

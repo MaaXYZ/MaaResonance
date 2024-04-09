@@ -8,7 +8,7 @@ use tauri::{
 use tauri_plugin_notification::NotificationExt;
 use tracing::{error, info, trace, trace_span};
 
-use crate::{ConfigHolderState, TaskQueueState};
+use crate::TaskQueueState;
 
 pub const CALLBACK_EVENT: &str = "callback";
 pub const QUEUE_DONE_EVENT: &str = "queue-done";
@@ -62,7 +62,6 @@ impl CallbackEventHandler {
 pub async fn setup_callback(
     app: AppHandle,
     queue: TaskQueueState,
-    config: ConfigHolderState,
     instance: Arc<MaaInstance<CallbackEventHandler>>,
     mut recv: Receiver<MaaMsg>,
 ) {
@@ -72,7 +71,6 @@ pub async fn setup_callback(
 
         let app_handle = app.clone();
         let queue = Arc::clone(&queue);
-        let config = Arc::clone(&config);
 
         let instance = Arc::clone(&instance);
 
@@ -83,12 +81,10 @@ pub async fn setup_callback(
         match msg {
             MaaMsg::TaskCompleted(_task) => {
                 let queue = Arc::clone(&queue);
-                let config = Arc::clone(&config);
                 async_runtime::spawn(async move {
                     info!("Running next task");
                     let mut queue = queue.lock().await;
-                    let config = config.lock().await;
-                    let has_next = queue.run_next(&instance, config.config(), true);
+                    let has_next = queue.run_next(&instance, true);
                     if !has_next {
                         #[allow(clippy::unwrap_used)]
                         app_handle.emit(QUEUE_DONE_EVENT, ()).unwrap();
@@ -100,8 +96,7 @@ pub async fn setup_callback(
                 error!("Task failed: {:?}", task);
                 notify!(app_handle, "Task Failed", &task.name);
                 let mut queue = queue.lock().await;
-                let config = config.lock().await;
-                let has_next = queue.run_next(&instance, config.config(), false);
+                let has_next = queue.run_next(&instance, false);
                 if !has_next {
                     #[allow(clippy::unwrap_used)]
                     app_handle.emit(QUEUE_DONE_EVENT, ()).unwrap();

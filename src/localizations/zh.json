@@ -20,7 +20,8 @@
     "appSettings": "应用设置",
     "noParams": "这个任务没有参数",
     "times": "次数",
-    "useFuel": "使用加速"
+    "useFuel": "使用加速",
+    "destination": "目的地"
   },
   "start": "开始",
   "stop": "停止",

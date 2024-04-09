@@ -1,17 +1,18 @@
 use maa_framework::instance::MaaInstance;
-use serde::{Deserialize, Serialize};
-use serde_json::json;
+use serde::Serialize;
+use serde_json::{json, Value};
 use tracing::{error, info, trace, trace_span};
 
 use crate::{
     callback::CallbackEventHandler,
     config::Config,
     task::{CombatParam, DriveCombatParam, TaskRunningState, TaskStatus, TaskType, TravelParam},
+    MaaZResult,
 };
 
-#[derive(Default, Serialize, Deserialize)]
+#[derive(Default, Serialize)]
 pub struct TaskQueue {
-    queue: Vec<TaskStatus>,
+    queue: Vec<(TaskStatus, Value)>,
 }
 
 #[derive(Debug)]
@@ -23,24 +24,24 @@ pub enum QueueStartStatus {
 
 impl TaskQueue {
     pub fn current_queue(&self) -> Vec<TaskStatus> {
-        self.queue.clone()
-    }
-
-    pub fn push(&mut self, task: TaskType) {
-        self.queue.push(task.into());
-    }
-
-    /// Append a task to right after the running task
-    pub fn append_next(&mut self, task: TaskType) {
-        if let Some(index) = self
-            .queue
+        self.queue
             .iter()
-            .position(|t| matches!(t.state, TaskRunningState::Pending))
-        {
-            self.queue.insert(index, task.into());
-        } else {
-            self.queue.push(task.into());
-        }
+            .map(|(status, _)| status.clone())
+            .collect()
+    }
+
+    pub fn push(&mut self, task: TaskType, config: Config) -> MaaZResult<()> {
+        let param = match task {
+            TaskType::StartUp => json!({}),
+            TaskType::Combat => serde_json::to_value(CombatParam::from(config.combat))?,
+            TaskType::DriveCombat => {
+                serde_json::to_value(DriveCombatParam::from(config.drive_combat))?
+            }
+            TaskType::Travel => serde_json::to_value(TravelParam::from(config.travel))?,
+        };
+        trace!("Pushing task {:?} with param {:?}", task, param);
+        self.queue.push((task.into(), param));
+        Ok(())
     }
 
     /// Remove a task from the queue
@@ -53,9 +54,9 @@ impl TaskQueue {
         if let Some(index) = self
             .queue
             .iter()
-            .position(|t| matches!(t.state, TaskRunningState::Running))
+            .position(|(t, _)| matches!(t.state, TaskRunningState::Running))
         {
-            self.queue[index].state = if success {
+            self.queue[index].0.state = if success {
                 TaskRunningState::Completed
             } else {
                 TaskRunningState::Failed
@@ -65,12 +66,7 @@ impl TaskQueue {
     }
 
     /// Mark the running task as completed and start the next task
-    pub fn run_next(
-        &mut self,
-        handle: &MaaInstance<CallbackEventHandler>,
-        config: Config,
-        success: bool,
-    ) -> bool {
+    pub fn run_next(&mut self, handle: &MaaInstance<CallbackEventHandler>, success: bool) -> bool {
         let span = trace_span!("run_next");
         let _guard = span.enter();
         self.complete_running(success);
@@ -78,32 +74,15 @@ impl TaskQueue {
         if let Some(index) = self
             .queue
             .iter()
-            .position(|t| matches!(t.state, TaskRunningState::Pending))
+            .position(|(t, _)| matches!(t.state, TaskRunningState::Pending))
         {
-            self.queue[index].state = TaskRunningState::Running;
-            let task = &mut self.queue[index];
+            self.queue[index].0.state = TaskRunningState::Running;
+            let (task, param) = &mut self.queue[index];
             info!("Running task {:?}", task);
 
             let entry = task.task_type.get_string();
 
-            let id = match task.task_type {
-                TaskType::StartUp => handle.post_task(&entry, json!({})),
-                TaskType::Combat => {
-                    let config = config.combat;
-                    let param: CombatParam = config.into();
-                    handle.post_task(&entry, param)
-                }
-                TaskType::DriveCombat => {
-                    let config = config.drive_combat;
-                    let param: DriveCombatParam = config.into();
-                    handle.post_task(&entry, param)
-                }
-                TaskType::Travel => {
-                    let config = config.travel;
-                    let param: TravelParam = config.into();
-                    handle.post_task(&entry, param)
-                }
-            };
+            let id = handle.post_task(&entry, param.clone());
             task.id = Some(id);
             true
         } else {
@@ -116,14 +95,10 @@ impl TaskQueue {
         !self
             .queue
             .iter()
-            .any(|t| matches!(t.state, TaskRunningState::Running))
+            .any(|(t, _)| matches!(t.state, TaskRunningState::Running))
     }
 
-    pub fn start(
-        &mut self,
-        handle: &MaaInstance<CallbackEventHandler>,
-        config: Config,
-    ) -> QueueStartStatus {
+    pub fn start(&mut self, handle: &MaaInstance<CallbackEventHandler>) -> QueueStartStatus {
         #[cfg(feature = "mock")]
         {
             return QueueStartStatus::Started;
@@ -137,13 +112,13 @@ impl TaskQueue {
         let has_pending = self
             .queue
             .iter()
-            .any(|t| matches!(t.state, TaskRunningState::Pending));
+            .any(|(t, _)| matches!(t.state, TaskRunningState::Pending));
         if !has_pending {
             info!("No pending tasks to run");
             return QueueStartStatus::NoPendingTasks;
         }
 
-        self.run_next(handle, config, true);
+        self.run_next(handle, true);
         QueueStartStatus::Started
     }
 
