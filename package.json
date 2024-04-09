@@ -15,22 +15,22 @@
     "@tauri-apps/plugin-dialog": "2.0.0-beta.1",
     "@tauri-apps/plugin-notification": "2.0.0-beta.0",
     "@tauri-apps/plugin-os": "2.0.0-beta.2",
-    "mdui": "^2.0.6",
+    "mdui": "^2.1.1",
     "path": "^0.12.7",
     "pinia": "^2.1.7",
-    "vue": "^3.3.4",
-    "vue-i18n": "^9.10.2"
+    "vue": "^3.4.21",
+    "vue-i18n": "^9.11.0"
   },
   "devDependencies": {
     "@tauri-apps/cli": "2.0.0-beta.2",
-    "@types/node": "^20.11.17",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.35",
+    "@types/node": "^20.12.6",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
     "tailwind": "^4.0.0",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.0.2",
-    "vite": "^5.0.0",
-    "vue-tsc": "^1.8.5"
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8",
+    "vue-tsc": "^1.8.27"
   }
 }

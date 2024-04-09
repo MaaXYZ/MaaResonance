@@ -8,26 +8,30 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-beta", features = [] }
+tauri-build = { version = "2.0.0-beta.11", features = [] }
 zip = { version = "0.6.6", default-features = false, features = ["deflate"] }
 
 [dependencies]
-tauri = { version = "2.0.0-beta", features = ["unstable"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-tracing = "0.1.40"
-tracing-subscriber = { version = "0.3.18", features = ["time", "local-time"] }
-tracing-appender = "0.2.3"
-toml = "0.8.10"
-tauri-plugin-notification = "2.0.0-beta.0"
+tauri = { version = "2.0.0-beta.14", features = ["unstable"] }
+tauri-plugin-notification = "2.0.0-beta.3"
+tauri-plugin-dialog = "2.0.0-beta.4"
+tauri-plugin-os = "2.0.0-beta.3"
+
 maa-framework = { version = "0.3.2", default-features = false, features = [
     "adb",
     "toolkit",
     "internal",
 ] }
-tauri-plugin-dialog = "2.0.0-beta.4"
+
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8.10"
+
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["time", "local-time"] }
+tracing-appender = "0.2.3"
+
 thiserror = "1.0.57"
-tauri-plugin-os = "2.0.0-beta.3"
 
 [lib]
 name = "maaz"
