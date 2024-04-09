@@ -50,6 +50,7 @@ pub fn run() {
 
     tracing::info!("Starting Maa");
 
+    #[allow(clippy::str_to_string)]
     let ret = tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_notification::init())
@@ -82,7 +83,6 @@ pub fn run() {
             commands::config::get_config,
             commands::config::set_controller_type,
             commands::config::set_combat_times,
-            commands::config::set_use_fuel,
             commands::config::set_destination,
             commands::task::add_task_to_queue,
             commands::task::start_queue,

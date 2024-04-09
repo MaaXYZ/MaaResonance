@@ -6,13 +6,11 @@ import {
 } from "@/interface/TaskStatus";
 import EmptySettings from "./settings/EmptySettings.vue";
 import CombatSettings from "./settings/CombatSettings.vue";
-import DriveCombatSettings from "./settings/DriveCombatSettings.vue";
 import TravelSettings from "./settings/TravelSettings.vue";
 
 const tabs: Record<TaskType, any> = {
     StartUp: EmptySettings,
     Combat: CombatSettings,
-    DriveCombat: DriveCombatSettings,
     Travel: TravelSettings,
 };
 </script>

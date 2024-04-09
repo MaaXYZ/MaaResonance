@@ -4,10 +4,9 @@ use maa_framework::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-use tracing::debug;
 
 use crate::{
-    config::{combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig},
+    config::{combat::CombatConfig, travel::TravelConfig},
     MaaZError,
 };
 
@@ -65,7 +64,7 @@ macro_rules! task_type {
     };
 }
 
-task_type!(StartUp, Combat, DriveCombat, Travel);
+task_type!(StartUp, Combat, Travel);
 
 pub struct CombatParam {
     pub times: u32,
@@ -101,37 +100,6 @@ impl Serialize for CombatParam {
 }
 
 impl TaskParam for CombatParam {}
-
-pub struct DriveCombatParam {
-    pub use_fuel: bool,
-}
-
-impl From<DriveCombatConfig> for DriveCombatParam {
-    fn from(config: DriveCombatConfig) -> Self {
-        Self {
-            use_fuel: config.use_fuel,
-        }
-    }
-}
-
-impl Serialize for DriveCombatParam {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: serde::ser::Serializer,
-    {
-        let task = DiffTaskBuilder::default()
-            .enabled(Some(self.use_fuel))
-            .build()
-            .ok();
-        json!({
-            "UseBullet":task
-        })
-        .serialize(serializer)
-    }
-}
-
-impl TaskParam for DriveCombatParam {}
-
 pub struct TravelParam {
     pub destination: String,
 }

@@ -6,7 +6,7 @@ use tracing::{error, info, trace, trace_span};
 use crate::{
     callback::CallbackEventHandler,
     config::Config,
-    task::{CombatParam, DriveCombatParam, TaskRunningState, TaskStatus, TaskType, TravelParam},
+    task::{CombatParam, TaskRunningState, TaskStatus, TaskType, TravelParam},
     MaaZResult,
 };
 
@@ -34,9 +34,6 @@ impl TaskQueue {
         let param = match task {
             TaskType::StartUp => json!({}),
             TaskType::Combat => serde_json::to_value(CombatParam::from(config.combat))?,
-            TaskType::DriveCombat => {
-                serde_json::to_value(DriveCombatParam::from(config.drive_combat))?
-            }
             TaskType::Travel => serde_json::to_value(TravelParam::from(config.travel))?,
         };
         trace!("Pushing task {:?} with param {:?}", task, param);

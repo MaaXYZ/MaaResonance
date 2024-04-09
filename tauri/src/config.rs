@@ -4,13 +4,10 @@ use serde::{Deserialize, Serialize};
 
 use crate::MaaZInnerResult;
 
-use self::{
-    app::AppConfig, combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig,
-};
+use self::{app::AppConfig, combat::CombatConfig, travel::TravelConfig};
 
 pub mod app;
 pub mod combat;
-pub mod drive_combat;
 pub mod travel;
 
 #[allow(clippy::struct_field_names)]
@@ -19,8 +16,6 @@ pub mod travel;
 pub struct Config {
     #[serde(default)]
     pub combat: CombatConfig,
-    #[serde(default)]
-    pub drive_combat: DriveCombatConfig,
     #[serde(default)]
     pub travel: TravelConfig,
     #[serde(default)]

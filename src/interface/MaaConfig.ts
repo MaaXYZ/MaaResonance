@@ -54,9 +54,6 @@ export interface MaaConfig {
     combat: {
         times: number;
     };
-    driveCombat: {
-        use_fuel: boolean;
-    };
     travel: {
         destination: Destination;
     };
