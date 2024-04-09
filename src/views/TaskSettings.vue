@@ -12,6 +12,7 @@ const tabs: Record<TaskType, any> = {
     StartUp: EmptySettings,
     Combat: CombatSettings,
     Travel: TravelSettings,
+    BuyStart: EmptySettings,
 };
 </script>
 

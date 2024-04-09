@@ -32,7 +32,7 @@ impl TaskQueue {
 
     pub fn push(&mut self, task: TaskType, config: Config) -> MaaZResult<()> {
         let param = match task {
-            TaskType::StartUp => json!({}),
+            TaskType::StartUp | TaskType::BuyStart => json!({}),
             TaskType::Combat => serde_json::to_value(CombatParam::from(config.combat))?,
             TaskType::Travel => serde_json::to_value(TravelParam::from(config.travel))?,
         };

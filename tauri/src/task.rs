@@ -64,7 +64,7 @@ macro_rules! task_type {
     };
 }
 
-task_type!(StartUp, Combat, Travel);
+task_type!(StartUp, Combat, Travel, BuyStart);
 
 pub struct CombatParam {
     pub times: u32,

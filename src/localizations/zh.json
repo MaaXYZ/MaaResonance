@@ -32,6 +32,7 @@
     "combat": "战斗",
     "startUp": "启动",
     "driveCombat": "自动接敌",
-    "travel": "旅行"
+    "travel": "旅行",
+    "buyStart": "购买低价商品"
   }
 }

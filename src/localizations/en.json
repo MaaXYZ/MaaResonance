@@ -27,7 +27,8 @@
     "startUp": "Start Up",
     "combat": "Combat",
     "driveCombat": "Drive Combat",
-    "travel": "Travel"
+    "travel": "Travel",
+    "buyStart": "Buy"
   },
   "close": "Close",
   "queueStopped": "Queue Stopped",
