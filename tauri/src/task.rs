@@ -4,6 +4,7 @@ use maa_framework::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use tracing::debug;
 
 use crate::{
     config::{combat::CombatConfig, drive_combat::DriveCombatConfig, travel::TravelConfig},
@@ -153,7 +154,7 @@ impl Serialize for TravelParam {
             .build()
             .ok();
         json!({
-            "Travel":task
+            "Recognition":task
         })
         .serialize(serializer)
     }
